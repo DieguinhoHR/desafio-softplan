@@ -7,13 +7,18 @@ import sofplan.softplayer.domain.model.People;
 import sofplan.softplayer.domain.repository.PeopleRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class PeopleService {
     private final PeopleRepository peopleRepository;
 
-    public List<People> list() {
+    public List<People> listAll() {
         return peopleRepository.findAll();
+    }
+
+    public Optional<People> findById(Long id) {
+        return peopleRepository.findById(id);
     }
 }
