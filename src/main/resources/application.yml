@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: on_param
+
+spring:
+  application:
+    name: churnz
+  datasource:
+    url: jdbc:mysql://localhost:3308/softplayer?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
