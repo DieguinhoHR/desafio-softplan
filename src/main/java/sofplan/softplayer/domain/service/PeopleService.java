@@ -1,6 +1,6 @@
 package sofplan.softplayer.domain.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sofplan.softplayer.api.v1.requests.PeoplePostRequestBody;
 import sofplan.softplayer.api.v1.requests.PeoplePutRequestBody;
@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PeopleService {
     private final PeopleRepository peopleRepository;
 

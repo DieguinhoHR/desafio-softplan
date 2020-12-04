@@ -11,10 +11,11 @@ import sofplan.softplayer.api.v1.requests.PeoplePutRequestBody;
 import sofplan.softplayer.domain.model.People;
 import sofplan.softplayer.domain.service.PeopleService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/people", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/people")
 @Log4j2
 @RequiredArgsConstructor
 public class PeopleController {
@@ -37,7 +38,7 @@ public class PeopleController {
     }
 
     @PostMapping
-    public ResponseEntity<People> save(@RequestBody PeoplePostRequestBody peoplePostRequestBody) {
+    public ResponseEntity<People> save(@RequestBody @Valid PeoplePostRequestBody peoplePostRequestBody) {
         return new ResponseEntity<>(peopleService.save(peoplePostRequestBody), HttpStatus.CREATED);
     }
 
