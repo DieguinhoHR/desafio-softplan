@@ -9,8 +9,9 @@ import sofplan.softplayer.domain.model.People;
 @Mapper(componentModel = "spring") // possibilita fazer injeção de depencia caso precise
 public abstract class PeopleMapper {
     public static final PeopleMapper INSTANCE = Mappers.getMapper(PeopleMapper.class);
-    // Realiza a conversão dos atributos
+
     public abstract People toPeople(PeoplePostRequestBody peoplePostRequestBody);
+
     public abstract People toPeople(PeoplePutRequestBody peoplePutRequestBody);
 }
 

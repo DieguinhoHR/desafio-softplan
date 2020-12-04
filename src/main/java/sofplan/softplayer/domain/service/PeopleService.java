@@ -1,11 +1,10 @@
 package sofplan.softplayer.domain.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import sofplan.softplayer.api.v1.requests.PeoplePostRequestBody;
 import sofplan.softplayer.api.v1.requests.PeoplePutRequestBody;
+import sofplan.softplayer.domain.exception.PeopleNotFoundException;
 import sofplan.softplayer.domain.model.People;
 import sofplan.softplayer.domain.model.mapper.PeopleMapper;
 import sofplan.softplayer.domain.repository.PeopleRepository;
@@ -28,7 +27,7 @@ public class PeopleService {
 
     public People findById(Long id) {
         return peopleRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
+                .orElseThrow(() -> new PeopleNotFoundException("Pessoa não encontrada"));
     }
 
     @Transactional
