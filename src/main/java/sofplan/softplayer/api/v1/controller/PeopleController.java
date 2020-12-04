@@ -3,11 +3,10 @@ package sofplan.softplayer.api.v1.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sofplan.softplayer.api.v1.requests.PeoplePostRequestBody;
-import sofplan.softplayer.api.v1.requests.PeoplePutRequestBody;
+import sofplan.softplayer.api.v1.dto.PeopleDTO;
+import sofplan.softplayer.api.v1.dto.PeopleNewDTO;
 import sofplan.softplayer.domain.model.People;
 import sofplan.softplayer.domain.service.PeopleService;
 
@@ -38,13 +37,13 @@ public class PeopleController {
     }
 
     @PostMapping
-    public ResponseEntity<People> save(@RequestBody @Valid PeoplePostRequestBody peoplePostRequestBody) {
+    public ResponseEntity<People> save(@RequestBody @Valid PeopleNewDTO peoplePostRequestBody) {
         return new ResponseEntity<>(peopleService.save(peoplePostRequestBody), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody PeoplePutRequestBody peoplePutRequestBody) {
-        peopleService.update(peoplePutRequestBody);
+    public ResponseEntity<Void> update(@RequestBody PeopleDTO peopleDTO) {
+        peopleService.update(peopleDTO);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

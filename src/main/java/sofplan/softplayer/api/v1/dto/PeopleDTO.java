@@ -1,4 +1,4 @@
-package sofplan.softplayer.api.v1.requests;
+package sofplan.softplayer.api.v1.dto;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Data
-public class PeoplePutRequestBody {
+public class PeopleDTO {
     private Long id;
     private String name;
     private Gender gender = Gender.MALE;

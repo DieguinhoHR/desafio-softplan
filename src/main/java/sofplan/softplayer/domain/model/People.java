@@ -23,6 +23,8 @@ public class People {
     private String name;
     private Gender gender = Gender.MALE;
     private String email;
+    @JsonIgnore
+    private String password;
     @JsonProperty("date_birth")
     @Column(name = "date_birth")
     private LocalDate dateBirth;
