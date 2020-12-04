@@ -31,6 +31,11 @@ public class PeopleController {
         return ResponseEntity.ok(peopleService.findById(id));
     }
 
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<People>> findByName(@RequestParam String name) {
+        return ResponseEntity.ok(peopleService.findByName(name));
+    }
+
     @PostMapping
     public ResponseEntity<People> save(@RequestBody PeoplePostRequestBody peoplePostRequestBody) {
         return new ResponseEntity<>(peopleService.save(peoplePostRequestBody), HttpStatus.CREATED);

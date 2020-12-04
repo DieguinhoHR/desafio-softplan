@@ -22,6 +22,10 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
+    public List<People> findByName(String name) {
+        return peopleRepository.findByName(name);
+    }
+
     public People findById(Long id) {
         return peopleRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
