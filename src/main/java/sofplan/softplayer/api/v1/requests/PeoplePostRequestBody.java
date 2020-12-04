@@ -1,26 +1,16 @@
-package sofplan.softplayer.domain.model;
+package sofplan.softplayer.api.v1.requests;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import sofplan.softplayer.domain.model.Gender;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Builder
-public class People {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PeoplePostRequestBody {
     private String name;
     private Gender gender = Gender.MALE;
     private String email;
