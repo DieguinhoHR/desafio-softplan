@@ -4,7 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import sofplan.softplayer.domain.model.Gender;
+import sofplan.softplayer.domain.model.enums.Gender;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;

@@ -1,8 +1,10 @@
 package sofplan.softplayer.domain.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import sofplan.softplayer.api.v1.dto.PeopleDTO;
 import sofplan.softplayer.api.v1.dto.PeopleNewDTO;
 import sofplan.softplayer.domain.exception.PeopleNotFoundException;
@@ -17,10 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PeopleService {
     private final PeopleRepository peopleRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<People> listAll() {
-        return peopleRepository.findAll();
+    public Page<People> listAll(Pageable pageable) {
+        return peopleRepository.findAll(pageable);
     }
 
     public List<People> findByName(String name) {
@@ -34,7 +35,6 @@ public class PeopleService {
 
     @Transactional
     public People save(PeopleNewDTO peoplePostRequestBody) {
-        peoplePostRequestBody.setPassword(bCryptPasswordEncoder.encode(peoplePostRequestBody.getPassword()));
         return peopleRepository.save(PeopleMapper.INSTANCE.toPeople(peoplePostRequestBody));
     }
 

@@ -8,9 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
-import sofplan.softplayer.domain.model.Gender;
+import sofplan.softplayer.domain.model.enums.Gender;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -25,12 +26,11 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 public class PeopleNewDTO {
     @NotEmpty(message = "O campo nome é obrigatório")
+    @Length(min=5, max=120, message = "O tamanho deve ser entre 5 e 120 caracteres")
     private String name;
     private Gender gender = Gender.MALE;
-    @Email
+    @Email(message = "Email inválido")
     private String email;
-    @NotEmpty(message = "O campo senha é obrigatório")
-    private String password;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @JsonFormat(pattern = "MM/dd/yyyy")
     @NotNull(message = "O campo data de nascimento não pode ser vazio")
@@ -38,7 +38,7 @@ public class PeopleNewDTO {
     private LocalDate dateBirth;
     private String naturalness;
     private String nationality;
-    @NotEmpty(message = "O campo CPF é obrigatório")
+    @NotEmpty(message = "Preenchimento obrigatório")
     @CPF(message="CPF inválido, digite novamente")
     @Size(min = 14)
     private String cpf;

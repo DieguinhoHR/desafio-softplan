@@ -12,8 +12,11 @@ spring:
     password: secret
   jpa:
     hibernate:
-      ddl-auto: create-drop
-      #ddl-auto: update
+      #ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+jwt:
+  secret: SequenciaDeCaracteresParaAssinarToken
+  expiration: 60000
