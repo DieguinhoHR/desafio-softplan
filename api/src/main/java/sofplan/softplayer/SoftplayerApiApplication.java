@@ -11,5 +11,4 @@ public class SoftplayerApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(SoftplayerApiApplication.class, args);
     }
-
 }
