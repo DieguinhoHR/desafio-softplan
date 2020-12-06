@@ -1,5 +1,6 @@
 package sofplan.softplayer.api.v1.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Data
+@Builder
 public class PeopleDTO {
     private Long id;
     private String name;

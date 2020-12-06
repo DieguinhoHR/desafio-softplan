@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import sofplan.softplayer.domain.model.enums.Gender;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
@@ -30,6 +31,7 @@ public class People {
     private String naturalness;
     private String nationality;
     @Column(unique=true)
+    @NotEmpty(message = "O campo cpf não pode ser vazio")
     private String cpf;
 
     @CreationTimestamp

@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import sofplan.softplayer.domain.model.People;
-import sofplan.softplayer.domain.model.enums.Gender;
 
-import java.time.LocalDate;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
+
+import static sofplan.softplayer.util.PeopleCreator.createPeopleToBeSaved;
 
 @DataJpaTest
 @DisplayName("Test for People Repository")
@@ -21,7 +22,7 @@ class PeopleRepositoryTest {
     @Test
     @DisplayName("Deve salvar uma pessoa com sucesso")
     void should_persist_when_successful() {
-        People peopleToBeSaved = createPeople();
+        People peopleToBeSaved = createPeopleToBeSaved();
         People peopleSaved = this.peopleRepository.save(peopleToBeSaved);
 
         Assertions.assertThat(peopleSaved).isNotNull();
@@ -33,7 +34,7 @@ class PeopleRepositoryTest {
     @Test
     @DisplayName("Deve atualizar uma pessoa com sucesso")
     void should_updated_people_when_successful() {
-        People peopleToBeSaved = createPeople();
+        People peopleToBeSaved = createPeopleToBeSaved();
         People peopleSaved = this.peopleRepository.save(peopleToBeSaved);
 
         peopleSaved.setName("Vegeta");
@@ -48,7 +49,7 @@ class PeopleRepositoryTest {
     @Test
     @DisplayName("Deve remover uma pessoa com sucesso")
     void should_remove_people_when_successful() {
-        People peopleToBeSaved = createPeople();
+        People peopleToBeSaved = createPeopleToBeSaved();
         People peopleSaved = this.peopleRepository.save(peopleToBeSaved);
 
         this.peopleRepository.delete(peopleSaved);
@@ -61,15 +62,16 @@ class PeopleRepositoryTest {
     @Test
     @DisplayName("Deve buscar uma pessoa pelo nome com sucesso")
     void should_find_by_name_people_when_successful() {
-        People peopleToBeSaved = createPeople();
+        People peopleToBeSaved = createPeopleToBeSaved();
         People peopleSaved = this.peopleRepository.save(peopleToBeSaved);
 
         String name = peopleSaved.getName();
 
         List<People> people = this.peopleRepository.findByName(name);
 
-        Assertions.assertThat(people).isNotEmpty();
-        Assertions.assertThat(people).contains(peopleSaved);
+        Assertions.assertThat(people)
+                .isNotEmpty()
+                .contains(peopleSaved);
     }
 
     @Test
@@ -79,16 +81,12 @@ class PeopleRepositoryTest {
         Assertions.assertThat(people).isEmpty();
     }
 
-    private People createPeople() {
-        return People.builder()
-                .name("Majin boo")
-                .gender(Gender.MALE)
-                .email("majinboo@dragonball.com")
-                .dateBirth(LocalDate.now())
-                .naturalness("Porto alegre")
-                .nationality("Brasileiro")
-                .cpf("335.747.130-29")
-                .build();
-   }
-
+    @Test
+    @DisplayName("Save throw ConstraintViolationException quando cpf está vazio")
+    void should_throws_constraint_violation_exception_when_cpf_is_empty(){
+        People people = new People();
+        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+                .isThrownBy(() -> this.peopleRepository.save(people))
+                .withMessageContaining("O campo cpf não pode ser vazio");
+    }
 }
