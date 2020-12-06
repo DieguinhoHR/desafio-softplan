@@ -28,7 +28,7 @@ public class PeopleService {
         return peopleRepository.findByName(name);
     }
 
-    public People findById(Long id) {
+    public People findById(long id) {
         return peopleRepository.findById(id)
                 .orElseThrow(() -> new PeopleNotFoundException("Pessoa não encontrada"));
     }
