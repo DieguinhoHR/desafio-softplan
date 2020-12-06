@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
+import sofplan.softplayer.domain.model.People;
 import sofplan.softplayer.domain.repository.PeopleRepository;
+import sofplan.softplayer.util.PeopleCreator;
 
 import static io.restassured.RestAssured.given;
 
@@ -71,29 +73,17 @@ public class PeopleControllerIT {
     }
 
     @Test
-    void should_return_status_204_when_update_people() {
+    void should_return_status_204_when_delete_people() {
+        People people = peopleRepository.save(PeopleCreator.createPeopleToBeSaved());
+
         given()
-            .pathParam("peopleId", 1)
+            .pathParam("peopleId", people.getId())
             .auth()
             .oauth2(token)
-            .body("{\"email\": \"bibop@gmail.com\"}")
             .accept(ContentType.JSON)
         .when()
             .delete("/{peopleId}")
         .then()
-            .statusCode(HttpStatus.NO_CONTENT.value());
-    }
-
-    @Test
-    void should_return_status_204_when_delete_people() {
-        given()
-            .pathParam("peopleId", 1)
-            .auth()
-            .oauth2(token)
-            .accept(ContentType.JSON)
-        .when()
-            .put("/{peopleId}")
-            .then()
             .statusCode(HttpStatus.NO_CONTENT.value());
     }
 }
