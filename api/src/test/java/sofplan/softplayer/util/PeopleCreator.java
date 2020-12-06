@@ -14,7 +14,7 @@ public class PeopleCreator {
                 .dateBirth(LocalDate.now())
                 .naturalness("Porto alegre")
                 .nationality("Brasileiro")
-                .cpf("335.747.130-29")
+                .cpf("707.338.850-12")
                 .build();
     }
 

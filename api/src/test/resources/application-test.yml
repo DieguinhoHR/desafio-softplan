@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: soft-test
+    datasource:
+        url: jdbc:mysql://localhost:3308/softplayer_test?allowPublicKeyRetrieval=true&sslMode=DISABLED
+        username: root
+        password: secret
+    jpa:
+        hibernate:
+            ddl-auto: create-drop

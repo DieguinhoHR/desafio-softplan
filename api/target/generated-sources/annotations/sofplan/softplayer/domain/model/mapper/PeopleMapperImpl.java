@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 import sofplan.softplayer.api.v1.dto.PeopleDTO;
 import sofplan.softplayer.api.v1.dto.PeopleNewDTO;
 import sofplan.softplayer.domain.model.People;
+import sofplan.softplayer.domain.model.People.PeopleBuilder;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-12-06T00:28:27-0300",
+    date = "2020-12-06T18:35:55-0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
 )
 @Component
@@ -20,9 +21,19 @@ public class PeopleMapperImpl implements PeopleMapper {
             return null;
         }
 
-        People people = new People();
+        PeopleBuilder people = People.builder();
 
-        return people;
+        people.name( peoplePostRequestBody.getName() );
+        people.gender( peoplePostRequestBody.getGender() );
+        people.email( peoplePostRequestBody.getEmail() );
+        people.dateBirth( peoplePostRequestBody.getDateBirth() );
+        people.naturalness( peoplePostRequestBody.getNaturalness() );
+        people.nationality( peoplePostRequestBody.getNationality() );
+        people.cpf( peoplePostRequestBody.getCpf() );
+        people.createdAt( peoplePostRequestBody.getCreatedAt() );
+        people.updatedAt( peoplePostRequestBody.getUpdatedAt() );
+
+        return people.build();
     }
 
     @Override
@@ -31,8 +42,19 @@ public class PeopleMapperImpl implements PeopleMapper {
             return null;
         }
 
-        People people = new People();
+        PeopleBuilder people = People.builder();
 
-        return people;
+        people.id( peopleDTO.getId() );
+        people.name( peopleDTO.getName() );
+        people.gender( peopleDTO.getGender() );
+        people.email( peopleDTO.getEmail() );
+        people.dateBirth( peopleDTO.getDateBirth() );
+        people.naturalness( peopleDTO.getNaturalness() );
+        people.nationality( peopleDTO.getNationality() );
+        people.cpf( peopleDTO.getCpf() );
+        people.createdAt( peopleDTO.getCreatedAt() );
+        people.updatedAt( peopleDTO.getUpdatedAt() );
+
+        return people.build();
     }
 }

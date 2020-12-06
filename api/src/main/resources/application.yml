@@ -1,11 +1,10 @@
 server:
-  port: 8080
   error:
     include-stacktrace: on_param
 
 spring:
   application:
-    name: churnz
+    name: soft
   datasource:
     url: jdbc:mysql://localhost:3308/softplayer?allowPublicKeyRetrieval=true&sslMode=DISABLED
     username: root
@@ -14,3 +13,4 @@ spring:
     hibernate:
       #ddl-auto: create-drop
       ddl-auto: update
+
