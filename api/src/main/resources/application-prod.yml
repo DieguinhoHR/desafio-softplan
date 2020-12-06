@@ -1,10 +1,10 @@
 spring:
   datasource:
-    url: mysql://b5f56b6f8e8444:c8496e8e@us-cdbr-east-02.cleardb.com/heroku_709351640d6f66c?reconnect=true
+    url: mysql://b28ec969abbf0a:aeddf601@us-cdbr-east-02.cleardb.com/heroku_f45af10224110ca?reconnect=true
   jpa:
     hibernate:
       #ddl-auto: create-drop
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
