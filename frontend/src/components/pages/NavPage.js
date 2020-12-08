@@ -16,7 +16,7 @@ function NavPage() {
         { authenticated && 
           <Nav.Link href="/people/index">Home</Nav.Link>
         }
-        <Nav.Link href="#features">Cadastrar usuário</Nav.Link>
+        <Nav.Link href="/auth/register">Cadastrar usuário</Nav.Link>
         { authenticated && 
           <Nav className="justify-content-end" activeKey="/home">
           <NavDropdown title="Opções" id="basic-nav-dropdown">
