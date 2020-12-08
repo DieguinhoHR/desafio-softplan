@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.2'
 
 services:
   db:
@@ -10,6 +10,12 @@ services:
       MYSQL_ROOT_PASSWORD: secret
     volumes:
       - softplayer_data:/var/lib/mysql
+
+  desafio-softplan:
+    image: registry.hub.docker.com/dieguinhohr/desafio-softplan:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    mem_limit: 512m
 
 volumes:
   softplayer_data:
