@@ -8,11 +8,14 @@ import {
 } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import { cpfMask, dateOfBirthMask } from '../../utils/masks';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function Create() {
+  const navigate = useNavigate();
   const [values, setValues] = useState({    
     name: '',
-    gender: '',
+    gender: '0',
     email: '',
     dateBirth: '',
     naturalness: '',
@@ -21,13 +24,21 @@ function Create() {
   });
 
   async function handleSave(values) {
-    console.log(values.gender)
     const obj = await api.post('/v1/admin/people', {
       'date_birth': values.dateBirth,
       ...values
     });
 
-    console.log(obj);
+    if (obj) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registro inserido com sucesso',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return navigate(`/people/index`, { replace: true });          
+    }
   }
 
   const handleChange = (event) => {
@@ -40,7 +51,7 @@ function Create() {
   return (
     <div className="container">
       <Card>
-        <Card.Header as="h5">Cadastro de pessoa</Card.Header>
+        <Card.Header as="h5">Cadastrar de pessoa</Card.Header>
         <Card.Body>
           <Form onSubmit={event => {
               event.preventDefault();
@@ -55,7 +66,6 @@ function Create() {
                     name="name"
                     value={values.name}
                     onChange={handleChange}
-                    required
                     placeholder="Digite seu nome de usuário" />         
                 </Col>
                 <Col xs="6">
@@ -65,7 +75,6 @@ function Create() {
                     name="email"
                     value={values.email}
                     onChange={handleChange}
-                    required
                     placeholder="Digite seu email" />      
                 </Col>        
               </Row>
@@ -119,7 +128,6 @@ function Create() {
                     name="nationality"
                     value={values.nationality}
                     onChange={handleChange}
-                    required
                     placeholder="Digite sua nacionalidade" />  
                 </Col>
 
@@ -130,7 +138,6 @@ function Create() {
                     name="naturalness"
                     value={values.naturalness}
                     onChange={handleChange}
-                    required
                     placeholder="Digite sua naturalidade" />  
                 </Col>
               </Row>

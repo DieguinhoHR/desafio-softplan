@@ -11,7 +11,7 @@ function NavPage() {
 
   return (
     <Navbar bg="primary" variant="dark">
-      <Navbar.Brand href="#home">Desafio Softplayer</Navbar.Brand>
+      <Navbar.Brand href="/people/index">Desafio Softplayer</Navbar.Brand>
       <Nav className="mr-auto">
         { authenticated && 
           <Nav.Link href="/people/index">Home</Nav.Link>

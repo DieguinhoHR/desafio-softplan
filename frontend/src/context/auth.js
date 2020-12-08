@@ -14,7 +14,7 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem('token');
 
     if (token) {
-      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      api.defaults.headers.Authorization = `${JSON.parse(token)}`;
       setAuthenticated(true);
     }
     setLoading(false);
@@ -25,7 +25,7 @@ function AuthProvider({ children }) {
     const token = obj.data;
 
     localStorage.setItem('token', JSON.stringify(token));
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `${token}`;
     setAuthenticated(true);
     navigate('/people/index', { replace: true });    
   }
