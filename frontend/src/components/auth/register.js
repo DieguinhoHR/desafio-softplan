@@ -1,14 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Button,
+  Card,
 } from 'react-bootstrap';
-import { AuthContext } from '../../context/auth';
-import api from '../../services/api'
+import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const Login = () => {
-  const { handleLogin } = useContext(AuthContext);
-
+const Register = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: '',
     password: '',
@@ -23,61 +24,79 @@ const Login = () => {
     });
   };
 
-  function handleSave() {
-    api.post(`/v1/users`, {...values})
-      .then(result => {
-        //setValues(result.data)
-        console.log('d');
+  async function handleSave() {
+    const obj = await api.post('/v1/users', {
+      ...values
+    });
+
+    if (obj) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registro inserido com sucesso',
+        showConfirmButton: false,
+        timer: 1500
       });
+      return navigate('/', { replace: true });
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Deu ruim',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
   }
 
   return (
     <div className="container">
-      <Form onSubmit={event => {
-        event.preventDefault();
-        handleSave();
-      }}>
-        <Form.Group controlId="formBasicUsername">
-            <Form.Label>Nome de usuário</Form.Label>
-            <Form.Control type="username" placeholder="Digite seu nome de usuário" />
-            <Form.Text 
-              className="text-muted"
-              name="username"
-              value={values.username}
-              onChange={handleChange}
-              required
-            >
-                Digite seu usuário
-            </Form.Text>
-        </Form.Group>
+      <Card>
+        <Card.Header as="h5">Cadastrar de usuário</Card.Header>
+        <Card.Body>
+          <Form onSubmit={event => {
+            event.preventDefault();
+            handleSave();
+          }}>
+            <Form.Group controlId="formBasicUsername">
+              <Form.Label>Nome de usuário</Form.Label>
+              <Form.Control type="username" 
+                className="text-muted"
+                name="username"
+                value={values.username}
+                required
+                onChange={handleChange}
+                placeholder="Digite seu nome de usuário" />
+            </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-            <Form.Label>Senha</Form.Label>
-            <input
-              type="password" 
-              className="form-control" 
-              id="password" 
-              required
-              placeholder="Digite sua senha" 
-            />
-        </Form.Group> 
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Senha</Form.Label>            
+                <Form.Control type="password" 
+                  className="text-muted"
+                  name="password"
+                  required
+                  value={values.password}
+                  onChange={handleChange}
+                  placeholder="Digite sua senha" />     
+            </Form.Group> 
 
-        <Form.Group controlId="formBasicPassword">
-            <Form.Label>Nome</Form.Label>
-            <input
-              type="name" 
-              className="form-control" 
-              id="name" 
-              required
-              placeholder="Digite seu nome" 
-            />
-        </Form.Group> 
-        <Button variant="primary" type="submit">
-            Salvar
-        </Button>
-      </Form>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Nome</Form.Label>
+              <Form.Control type="name" 
+                className="text-muted"
+                name="name"
+                required
+                value={values.name}
+                onChange={handleChange}
+                placeholder="Digite seu nome" />      
+            </Form.Group> 
+            <Button variant="primary" type="submit">
+                Salvar
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>   
   );
 };
 
-export default Login;
+export default Register;
