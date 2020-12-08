@@ -7,7 +7,6 @@ import {
   Card,
 } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
-import { cpfMask, dateOfBirthMask } from '../../utils/masks';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 
