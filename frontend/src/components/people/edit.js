@@ -13,14 +13,15 @@ import { useParams } from 'react-router-dom';
 function Create() {
   const [values, setValues] = useState({});
   const { id } = useParams();
-
-  useEffect(() => {
-    api.get(`/v1/admin/people/${id}`)
-        .then(result => {
-            setValues(result.data)
-        })
-  }, []);
   
+  useEffect(() => {
+    loadPeople()
+  });
+
+  async function loadPeople() {
+    const response = await api.get(`/v1/admin/people/${id}`)
+    setValues(response.data)
+ }
 
   async function handleUpdate(values) {
     const obj = await api.put(`/v1/admin/people`, {
