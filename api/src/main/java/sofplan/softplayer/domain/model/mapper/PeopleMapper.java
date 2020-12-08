@@ -10,13 +10,13 @@ import sofplan.softplayer.domain.model.People;
 @Mapper(componentModel = "spring")
 public interface PeopleMapper {
     public static final PeopleMapper INSTANCE = Mappers.getMapper(PeopleMapper.class);
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "gender", target = "gender")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "dateBirth", target = "dateBirth")
-    @Mapping(source = "naturalness", target = "naturalness")
-    @Mapping(source = "nationality", target = "nationality")
-    @Mapping(source = "cpf", target = "cpf")
+//    @Mapping(source = "name", target = "name")
+//    @Mapping(source = "gender", target = "gender")
+//    @Mapping(source = "email", target = "email")
+//    @Mapping(source = "dateBirth", target = "dateBirth")
+//    @Mapping(source = "naturalness", target = "naturalness")
+//    @Mapping(source = "nationality", target = "nationality")
+//    @Mapping(source = "cpf", target = "cpf")
     public abstract People toPeople(PeopleNewDTO peoplePostRequestBody);
     public abstract People toPeople(PeopleDTO peopleDTO);
 }
