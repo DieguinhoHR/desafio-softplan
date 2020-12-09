@@ -9,7 +9,7 @@ import sofplan.softplayer.domain.model.People.PeopleBuilder;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-12-08T12:55:06-0300",
+    date = "2020-12-08T22:25:55-0300",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
 )
 @Component
